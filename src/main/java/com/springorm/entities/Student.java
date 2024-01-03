@@ -22,6 +22,12 @@ public class Student {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Student(int studentId, String studentName, String studentCity) {
+		this.studentId = studentId;
+		this.studentName = studentName;
+		this.studentCity = studentCity;
+	}
+
 	public int getStudentId() {
 		return studentId;
 	}
