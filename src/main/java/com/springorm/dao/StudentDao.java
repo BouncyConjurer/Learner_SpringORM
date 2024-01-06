@@ -9,12 +9,10 @@ import java.util.List;
 
 public class StudentDao {
 
-
 	HibernateTemplate hibernateTemplate;
 
-
 	//save Student
-	@Transactional(readOnly = false)
+	@Transactional
 	public int insert(Student student) {
 		//insert
 		Integer i =(Integer) this.hibernateTemplate.save(student);
@@ -38,13 +36,25 @@ public class StudentDao {
 	//deleting single data
 	@Transactional
 	public void delete(int studentId){
+		System.out.println("Data for "+studentId+" deleted!!");
 		Student student = this.hibernateTemplate.get(Student.class, studentId);
 		this.hibernateTemplate.delete(student);
 	}
 
 	@Transactional
-	public void update(int studentId){
-		this.hibernateTemplate.update(studentId);
+	public void update(int studentId, String studentName, String studentCity) {
+
+		Student studentToUpdate = this.hibernateTemplate.get(Student.class, studentId);
+
+			if (studentName != null) {
+				studentToUpdate.setStudentName(studentName);
+			}
+
+			if (studentCity != null) {
+				studentToUpdate.setStudentCity(studentCity);
+			}
+			// Update the student entity in the database
+			this.hibernateTemplate.update(studentToUpdate);
 
 	}
 
